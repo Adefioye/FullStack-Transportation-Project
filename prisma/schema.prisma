@@ -23,7 +23,7 @@ model event {
   y                  String? @db.VarChar(255)
   type               String? @db.VarChar(255)
   person             String? @db.VarChar(255)
-  time               String? @db.VarChar(255)
+  time               Float?
   transitrouteid     String? @db.VarChar(255)
   delay              String? @db.VarChar(255)
   destinationstop    String? @db.VarChar(255)
@@ -66,3 +66,4 @@ model node {
   link_link_from_nodeTonode link[]  @relation("link_from_nodeTonode")
   link_link_to_nodeTonode   link[]  @relation("link_to_nodeTonode")
 }
+

@@ -34,3 +34,8 @@ npm install @prisma/client
 ```
 npx prisma generate
 ```
+
+- Evolve schema to another version using 
+```
+npx prisma migrate dev --name <change that happened>
+```
