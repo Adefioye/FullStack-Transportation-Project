@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model event {
+  id                 Int     @id @default(autoincrement())
+  legmode            String? @db.VarChar(255)
+  departureid        String? @db.VarChar(255)
+  purpose            String? @db.VarChar(255)
+  vehicleid          String? @db.VarChar(255)
+  atstop             String? @db.VarChar(255)
+  x                  String? @db.VarChar(255)
+  amount             String? @db.VarChar(255)
+  transactionpartner String? @db.VarChar(255)
+  version            String? @db.VarChar(255)
+  relativeposition   String? @db.VarChar(255)
+  dvrpvehicle        String? @db.VarChar(255)
+  y                  String? @db.VarChar(255)
+  type               String? @db.VarChar(255)
+  person             String? @db.VarChar(255)
+  time               String? @db.VarChar(255)
+  transitrouteid     String? @db.VarChar(255)
+  delay              String? @db.VarChar(255)
+  destinationstop    String? @db.VarChar(255)
+  driverid           String? @db.VarChar(255)
+  link               String? @db.VarChar(255)
+  dvrpmode           String? @db.VarChar(255)
+  transitlineid      String? @db.VarChar(255)
+  mode               String? @db.VarChar(255)
+  facility           String? @db.VarChar(255)
+  distance           String? @db.VarChar(255)
+  agent              String? @db.VarChar(255)
+  networkmode        String? @db.VarChar(255)
+  acttype            String? @db.VarChar(255)
+  tasktype           String? @db.VarChar(255)
+  request            String? @db.VarChar(255)
+  vehicle            String? @db.VarChar(255)
+  taskindex          String? @db.VarChar(255)
+}
+
+model link {
+  link_id                   String? @unique @db.VarChar(255)
+  from_node                 String? @db.VarChar(255)
+  to_node                   String? @db.VarChar(255)
+  link_length               String? @db.VarChar(255)
+  freespeed                 String? @db.VarChar(255)
+  capacity                  String? @db.VarChar(255)
+  permlanes                 String? @db.VarChar(255)
+  oneway                    String? @db.VarChar(255)
+  modes                     String? @db.VarChar(255)
+  id                        Int     @id @default(autoincrement())
+  node_link_from_nodeTonode node?   @relation("link_from_nodeTonode", fields: [from_node], references: [node_id], onDelete: NoAction, onUpdate: NoAction)
+  node_link_to_nodeTonode   node?   @relation("link_to_nodeTonode", fields: [to_node], references: [node_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model node {
+  node_id                   String? @unique @db.VarChar(255)
+  x                         String? @db.VarChar(255)
+  y                         String? @db.VarChar(255)
+  id                        Int     @id @default(autoincrement())
+  link_link_from_nodeTonode link[]  @relation("link_from_nodeTonode")
+  link_link_to_nodeTonode   link[]  @relation("link_to_nodeTonode")
+}

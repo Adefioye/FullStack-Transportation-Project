@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TRANSPORTATION FULLSTACK PROJECT
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Set up prisma as a dev dependency, 
 ```
+npm install prisma --save-dev
+```
+- Invoke prisma CLI, 
+```
+npx prisma
+```
+- Set up prisma project, this creates `prisma` directory, `schema.prisma` file and `.env` file.
+```
+npx prisma init
+```
+- After this, Since postgres db has already being created locally, Run the code below, to make prisma create model based on schema of tables in the database. This literally makes `prisma` performs schema inference.
+```
+npx prisma db pull
+```
+- Baseline the database, by starting with initial migration and doing the following.
+```
+mkdir -p prisma/migrations/0_init
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql
+```
+- Mark the migration as resolved using
+```
+npx prisma migrate resolve --applied 0_init
+```
+- Install prisma client
+```
+npm install @prisma/client
+```
+- Make prisma aware of the new/update schema using
+```
+npx prisma generate
+```
