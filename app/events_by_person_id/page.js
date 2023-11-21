@@ -50,7 +50,7 @@ const EventsByPersonIdPage = () => {
         </div>
       </form>
       {/* Cards to display event information */}
-      <div className="grid sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-3 md:grid-cols-4 gap-4 !m-10">
         {eventData ? (
           eventData.map((event, i) => (
             <div
