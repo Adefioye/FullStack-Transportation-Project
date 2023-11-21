@@ -1,9 +1,11 @@
 "use client";
 
-import { getEventsPyPersonId } from "@/lib/actions/events.actions";
+import { getEventsByPersonId } from "@/lib/actions/events.actions";
 import React from "react";
+import Link from "next/link";
 
 import { useFormStatus, useFormState } from "react-dom";
+import BackToHomePage from "@/components/BackToHomePage";
 
 const initialState = {
   searchName: null,
@@ -24,12 +26,14 @@ export function SubmitButton() {
 }
 
 const EventsByPersonIdPage = () => {
-  const [state, formAction] = useFormState(getEventsPyPersonId, initialState);
+  const [state, formAction] = useFormState(getEventsByPersonId, initialState);
   const { eventData } = state;
 
   console.log("Length of event", eventData?.length ?? 0);
   return (
-    <div className="bg-slate-800 min-h-screen text-white flex flex-col space-y-5 items-center">
+    <div className="relative bg-slate-800 min-h-screen text-white flex flex-col space-y-5 items-center">
+      {/* GO BACK TO HOME PAGE BUTTON */}
+      <BackToHomePage />
       {/* Search box */}
       <form action={formAction} className="mt-5 flex flex-col items-center">
         <label htmlFor="search">Search event by person Id</label>
@@ -51,7 +55,7 @@ const EventsByPersonIdPage = () => {
           eventData.map((event, i) => (
             <div
               key={i}
-              className="p-4 px-5 border flex flex-col justify-center rounded-2xl shadow-lg" 
+              className="p-4 px-5 border flex flex-col justify-center rounded-2xl shadow-lg"
             >
               <p>{`Person:${event.person}`}</p>
               <p>{`Event type: ${event.type}`}</p>
