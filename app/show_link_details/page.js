@@ -7,9 +7,7 @@ import { useFormStatus, useFormState } from "react-dom";
 import BackToHomePage from "@/components/BackToHomePage";
 import { getLinkDetails } from "@/lib/actions/link.actions";
 
-const initialState = {
-  searchName: null,
-};
+const initialState = {};
 
 export function SubmitButton() {
   const { pending } = useFormStatus();

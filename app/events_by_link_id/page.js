@@ -6,9 +6,7 @@ import React from "react";
 
 import { useFormStatus, useFormState } from "react-dom";
 
-const initialState = {
-  searchName: null,
-};
+const initialState = {};
 
 export function SubmitButton() {
   const { pending } = useFormStatus();
